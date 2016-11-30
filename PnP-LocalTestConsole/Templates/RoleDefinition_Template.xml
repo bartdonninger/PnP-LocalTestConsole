@@ -47,7 +47,8 @@
           EnableFolderCreation="false">
 
           <pnp:Security>
-            <pnp:BreakRoleInheritance CopyRoleAssignments="true" ClearSubscopes="true">
+            <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="true">
+              <pnp:RoleAssignment Principal="{parameter:BeheerdersGroep}" RoleDefinition="Volledig beheer" />
               <pnp:RoleAssignment Principal="{parameter:RegisseursGroep}" RoleDefinition="{parameter:BeperktBijdragenRole}"/>
             </pnp:BreakRoleInheritance>
           </pnp:Security>
