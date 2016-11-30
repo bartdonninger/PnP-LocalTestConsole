@@ -1,0 +1,59 @@
+﻿<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+  <pnp:Preferences>
+    <pnp:Parameters>
+      <pnp:Parameter Key="RegisseursGroep">Regisseurs</pnp:Parameter>
+      <pnp:Parameter Key="BeheerdersGroep">Beheerders</pnp:Parameter>
+      <pnp:Parameter Key="BeperktBijdragenRole">Beperkt bijdragen</pnp:Parameter>
+      <pnp:Parameter Key="groupOwner">i:05.t|adfs|sp-install@dev.com</pnp:Parameter>    
+    </pnp:Parameters>
+  </pnp:Preferences>
+  
+  <pnp:Templates ID="CONTAINER-TEMPLATE-819C564282654030A12C73A642964170">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-819C564282654030A12C73A642964170" Version="1" BaseSiteTemplate="BLANKINTERNET#0">
+      <pnp:Security>
+        <pnp:SiteGroups>
+          <pnp:SiteGroup Title="{parameter:BeheerdersGroep}" Description="Een groep voor {parameter:BeheerdersGroep}" Owner="{parameter:groupOwner}" AllowMembersEditMembership="true"  />
+          <pnp:SiteGroup Title="{parameter:RegisseursGroep}" Description="Een groep voor {parameter:RegisseursGroep}" Owner="{parameter:groupOwner}" AllowMembersEditMembership="true" />
+        </pnp:SiteGroups>
+
+        <pnp:Permissions>
+          <pnp:RoleDefinitions>
+            <pnp:RoleDefinition Name="{parameter:BeperktBijdragenRole}" Description="Kan lijstitems en documenten weergeven en bijwerken.">
+              <pnp:Permissions>
+                <pnp:Permission>ViewListItems</pnp:Permission>
+                <pnp:Permission>EditListItems</pnp:Permission>
+              </pnp:Permissions>
+            </pnp:RoleDefinition>
+          </pnp:RoleDefinitions>
+          <pnp:RoleAssignments>
+            <pnp:RoleAssignment Principal="{parameter:BeheerdersGroep}" RoleDefinition="Volledig beheer" />
+            <pnp:RoleAssignment Principal="{parameter:RegisseursGroep}" RoleDefinition="Bijdragen" />
+          </pnp:RoleAssignments>
+        </pnp:Permissions>
+      </pnp:Security>
+      <pnp:Lists>
+        <pnp:ListInstance
+          Title="Bestuursperioden"
+          Description="Bestuursperioden"
+          DocumentTemplate=""
+          OnQuickLaunch="true"
+          TemplateType="100"
+          Url="Lists/Bestuursperioden"
+          MinorVersionLimit="0"
+          MaxVersionLimit="0"
+          DraftVersionVisibility="0"
+          TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100"
+          EnableFolderCreation="false">
+
+          <pnp:Security>
+            <pnp:BreakRoleInheritance CopyRoleAssignments="true" ClearSubscopes="true">
+              <pnp:RoleAssignment Principal="{parameter:RegisseursGroep}" RoleDefinition="{parameter:BeperktBijdragenRole}"/>
+            </pnp:BreakRoleInheritance>
+          </pnp:Security>
+          
+        </pnp:ListInstance>
+      </pnp:Lists>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

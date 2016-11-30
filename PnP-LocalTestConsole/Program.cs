@@ -36,32 +36,12 @@ namespace PnP_LocalTestConsole
                 if (provider != null)
                 {
                     // Get the template
-                    var template = provider.GetTemplate("PropertyBag_Template.xml");
+                    var template = provider.GetTemplate("RoleDefinition_Template.xml");
                     template.Connector = provider.Connector;
 
                     if (template != null)
                     {
-                        using (var clientContext2 = clientContext.Clone("https://sharepoint.dev.com/sites/testsitecollection/subsite1"))
-                        {
-                            //Web createdWeb = clientContext.Site.OpenWeb(new Uri("https://sharepoint.dev.com/sites/testsitecollection/subsite1").PathAndQuery);
-
-
-
-                            clientContext2.Web.ApplyProvisioningTemplate(template);
-
-                            // Todo: Should be added as tokens to the template, so the propertybag entries can be
-                            //  set in the PnP Template it self.
-                            // Check if tokens are null, insert them into the property bag
-                            //if (tokens != null)
-                            //{
-                            //foreach (var token in tokens)
-                            //{
-                            //// Create the propertybag entry and add the keys as indexed propertybag
-                            //createdWeb.SetPropertyBagValue(token.Key, token.Value);
-                            //createdWeb.AddIndexedPropertyBagKey(token.Key);
-                            //}
-                            //}
-                        }
+                        clientContext.Web.ApplyProvisioningTemplate(template);
                     }
                 }
 
