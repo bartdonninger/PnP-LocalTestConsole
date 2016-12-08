@@ -28,24 +28,25 @@ namespace PnP_LocalTestConsole
                 // Web properties - Display the Title and URL for the web  
                 Console.WriteLine("Title: " + web.Title + "; URL: " + web.Url);
 
+                var pagesLibrary =  web.GetPagesLibrary();
 
-                // Read the XML file
-                XMLTemplateProvider provider = new XMLFileSystemTemplateProvider(String.Format(@"{0}\Templates\", Environment.CurrentDirectory), "");
+                //// Read the XML file
+                //XMLTemplateProvider provider = new XMLFileSystemTemplateProvider(String.Format(@"{0}\Templates\", Environment.CurrentDirectory), "");
 
 
-                if (provider != null)
-                {
-                    // Get the template
-                    var template = provider.GetTemplate("RoleDefinition_Template.xml");
-                    template.Connector = provider.Connector;
+                //if (provider != null)
+                //{
+                //    // Get the template
+                //    var template = provider.GetTemplate("RoleDefinition_Template.xml");
+                //    template.Connector = provider.Connector;
 
-                    if (template != null)
-                    {
-                        clientContext.Web.ApplyProvisioningTemplate(template);
-                    }
-                }
+                //    if (template != null)
+                //    {
+                //        clientContext.Web.ApplyProvisioningTemplate(template);
+                //    }
+                //}
 
-                Console.ReadLine();
+                //Console.ReadLine();
 
             }
 
